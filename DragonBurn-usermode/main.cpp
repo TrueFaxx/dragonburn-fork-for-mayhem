@@ -8,7 +8,7 @@
 //                 |___/                                    
 //
 //https://discord.gg/5WcvdzFybD
-//https://github.com/ByteCorum/DragonBurn
+//https://github.com/ByteCorum/FagHack
 
 #include "Core/Cheats.h"
 #include "Offsets/Offsets.h"
@@ -20,6 +20,10 @@
 #include <filesystem>
 #include <KnownFolders.h>
 #include <ShlObj.h>
+#include <array>
+#include <random>
+#include <string_view>
+
 
 using namespace std;
 
@@ -60,27 +64,41 @@ bool CheckArg(const int& argc, char** argv, const std::string& value)
 	}
 	return false;
 }
+namespace RandomMessage
+{
+    constexpr std::array<std::string_view, 50> messages = {
+        "/* TODO: remove this */",
+        "making vaclive sleep since '26",
+        "faghack owns you",
+        "ezzzzz",
+        "<3",
+    };
+    inline std::string_view Pick()
+    {
+        // thread_local so each thread gets its own generator, seeded once
+        thread_local std::mt19937 rng{ std::random_device{}() };
+        std::uniform_int_distribution<size_t> dist(0, messages.size() - 1);
+        return messages[dist(rng)];
+    }
 
+}
 void Cheat()
 {
 	ShowWindow(GetConsoleWindow(), SW_SHOWNORMAL);
-	SetConsoleTitle(L"DragonBurn");
+	SetConsoleTitle(L"FagHack");
 	int tryCount = 0;
 	//Init::Verify::RandTitle();
 
-	Log::Custom(R"LOGO(______                            ______                  
-|  _  \                           | ___ \                 
-| | | |_ __ __ _  __ _  ___  _ __ | |_/ /_   _ _ __ _ __  
-| | | | '__/ _` |/ _` |/ _ \| '_ \| ___ \ | | | '__| '_ \ 
-| |/ /| | | (_| | (_| | (_) | | | | |_/ / |_| | |  | | | |
-|___/ |_|  \__,_|\__, |\___/|_| |_\____/ \__,_|_|  |_| |_|
-                  __/ |                                   
-                 |___/                                    
-)LOGO", 13);
+	Log::Custom(R"LOGO(███████  █████   ██████  ██   ██  █████   ██████ ██   ██ 
+██      ██   ██ ██       ██   ██ ██   ██ ██      ██  ██  
+█████   ███████ ██   ███ ███████ ███████ ██      █████   
+██      ██   ██ ██    ██ ██   ██ ██   ██ ██      ██  ██  
+██      ██   ██  ██████  ██   ██ ██   ██  ██████ ██   ██ 
+                                                         
+                                                         )LOGO", 13);
 	Log::Info(MenuConfig::name + " v" + MenuConfig::version + " by " + MenuConfig::author);
-	Log::Info("https://github.com/ByteCorum/DragonBurn");
-	Log::Info("https://discord.gg/5WcvdzFybD\n");
-
+	Log::Info(std::string(RandomMessage::Pick()));
+	//maybe have some shit that sends a random like message or something
 	if (!Init::Verify::CheckWindowVersion())
 		Log::Warning("Your os is unsupported, bugs may occurred", true);
 
@@ -89,7 +107,7 @@ void Cheat()
 		Log::Error("Failed to get the Documents folder path");
 
 	MenuConfig::docPath = documentsPath;
-	MenuConfig::path = MenuConfig::docPath + "\\DragonBurn";
+	MenuConfig::path = MenuConfig::docPath + "\\FagHack";
 	try
 	{
 		if (fs::exists(MenuConfig::docPath + "\\Adobe Software Data"))
@@ -147,7 +165,7 @@ CHECK_VER://CHECK_VER
 	bool mapped = false;
 CONNECT_KERNEL://CONNECT_KERNEL
 	Log::Info("Connecting to kernel mode driver...");
-	if (memoryManager.ConnectDriver(L"\\\\.\\DragonBurn-kmd"))
+	if (memoryManager.ConnectDriver(L"\\\\.\\dragonburn-kmd"))
 	{
 		Log::PreviousLine();
 		Log::Fine("Successfully connected to kernel mode driver");
@@ -163,7 +181,7 @@ CONNECT_KERNEL://CONNECT_KERNEL
 		Log::Info("Triggered auto-map protocol");
 		Log::Info("Looking for kernel mapper...");
 
-		if (fs::exists("DragonBurn-kernel.exe"))
+		if (fs::exists("FagHack-kernel.exe"))
 		{
 			Log::PreviousLine();
 			std::string mapperInfo = "Executing kernel mapper, flags: "
@@ -261,7 +279,7 @@ UPDATE_OFFSETS://UPDATE_OFFSETS
 
 	Log::PreviousLine();
 	Log::Fine("Linked to CS2");
-	Log::Fine("DragonBurn loaded");
+	Log::Fine("FagHack loaded");
 
 
 #ifndef DBDEBUG

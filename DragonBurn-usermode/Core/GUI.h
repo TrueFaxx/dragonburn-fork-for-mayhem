@@ -214,12 +214,12 @@ namespace GUI
 		ImGuiWindowFlags Flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar;
 		ImGui::SetNextWindowPos({ (ImGui::GetIO().DisplaySize.x - MenuConfig::WCS.MainWinSize.x) / 2.0f, (ImGui::GetIO().DisplaySize.y - MenuConfig::WCS.MainWinSize.y) / 2.0f }, ImGuiCond_Once);
 		ImGui::SetNextWindowSize(MenuConfig::WCS.MainWinSize);
-		ImGui::Begin("DragonBurn", nullptr, Flags);
+		ImGui::Begin("FagHack", nullptr, Flags);
 		{
 			ImGui::SetCursorPos(LogoPos);
 			ImGui::Image(ImageID, LogoSize);
 			if (ImGui::IsItemClicked()) {
-				Gui.OpenWebpage("https://github.com/ByteCorum/DragonBurn");
+				Gui.OpenWebpage("https://github.com/TrueFaxx/dragonburn-fork-for-mayhem");
 			}
 			ImGui::GetWindowDrawList()->AddRect(
 				ImVec2(MenuConfig::WCS.LogoPos.x + ImGui::GetWindowPos().x, MenuConfig::WCS.LogoPos.y + ImGui::GetWindowPos().y),
@@ -304,7 +304,7 @@ namespace GUI
 			
 			ImGui::BeginChild("Page", MenuConfig::WCS.ChildSize, false, ImGuiWindowFlags_AlwaysVerticalScrollbar);
 			{
-				ImGui::Text("   DragonBurn");
+				ImGui::Text("   FagHack");
 				ImGui::Separator();
 				if (MenuConfig::WCS.MenuPage == 1)
 				{
@@ -669,10 +669,10 @@ namespace GUI
 
 					ImGui::NewLine();
 					if (ImGui::Button("Source Code", { 125.f, 25.f }))
-						Gui.OpenWebpage("https://github.com/ByteCorum/DragonBurn");
+						Gui.OpenWebpage("https://github.com/TrueFaxx/dragonburn-fork-for-mayhem");
 					ImGui::SameLine();
 					if (ImGui::Button("Contact Author", { 125.f, 25.f }))
-						Gui.OpenWebpage("https://discord.gg/5WcvdzFybD");
+						Gui.OpenWebpage("https://github.com/TrueFaxx/dragonburn-fork-for-mayhem");
 					if (ImGui::Button("Unhook", { 125.f, 25.f }))
 						Init::Client::Exit();
 					ImGui::SameLine();
